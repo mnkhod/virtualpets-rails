@@ -1,0 +1,28 @@
+<h1>Pets |
+  <%= @pets.size %>
+</h1>
+
+<%= link_to "Create Virtual Pet", new_pet_path %>
+
+<hr>
+
+<% @pets.each do |pet| %>
+  <section>
+    <%= tag.h5 pet.name, class: "" %>
+    <div>
+      <%= tag.span pet.gender, class: "" %>
+      |
+      <%= tag.span pet.animal, class: "" %>
+      | hunger:
+      <%= tag.span pet.hunger, class: "" %>
+      | age:
+      <%= tag.span pet.age, class: "" %>
+      | level:
+      <%= tag.span pet.level, class: "" %>
+    </div>
+    <%= link_to "Chat with pet", nil %>
+    ||
+    <%= link_to "Check pet", nil %>
+  </section>
+  <hr>
+<% end %>

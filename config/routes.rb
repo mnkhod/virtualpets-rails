@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :pets
+
   namespace :metamask do
     resource :login, only: %i[ new create ]
   end

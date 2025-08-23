@@ -24,18 +24,30 @@
 
   <body>
     <header>
+      <% if authenticated? %>
+        <p>Hello,
+          <%= Current.user.email_address %></p>
+      <% end %>
       <div data-controller="metamask">
         <div data-metamask-target="content">
           <p>
             Address:
             <span data-metamask-target="address"></span>
           </p>
-          <button data-action="click->metamask#logout">Log Out</button>
+          <button data-action="click->metamask#logout">Metamask Log Out</button>
         </div>
 
         <div data-metamask-target="login" class="hidden">
         </div>
       </div>
+      <%= if authenticated?
+        button_to "Log out",
+        session_path,
+        method: :delete,
+        data: {
+          turbo_confirm: "Are you sure?",
+        }
+      end %>
       <br>
     </header>
     <main>

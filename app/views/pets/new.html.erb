@@ -1,0 +1,32 @@
+<h1>Create Pet</h1>
+
+<%= form_with model: [ @pet ] do |f| %>
+
+  <% if @pet.errors.any? %>
+    <% @pet.errors.each do |error| %>
+      <%= tag.p error.full_message %>
+    <% end %>
+  <% end %>
+
+  <fieldset>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :gender %>
+    <%= f.select :gender,
+             options_for_select(Pet.genders.map { |k, v| [k.capitalize, k] }),
+             { prompt: "Select gender" } %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :animal %>
+    <%= f.select :animal,
+             options_for_select(Pet.animals.map { |k, v| [k.capitalize, k] }),
+             { prompt: "Select Type" } %>
+  </fieldset>
+
+  <br>
+  <%= f.submit %>
+<% end %>
