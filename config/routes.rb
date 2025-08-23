@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "/json/pets/:nft_id", controller: "pets", action: :data
   resources :pets do
     resources :chats, only: %i[ show update ]
   end

@@ -30,6 +30,20 @@ class PetsController < ApplicationController
   def edit
   end
 
+  def data
+    @pet = Pet.find_by!(nft_id: params.expect(:nft_id).to_i)
+    render format: :json, json: {
+      name: @pet.name,
+      animal: @pet.animal,
+      age: @pet.age,
+      level: @pet.level,
+      hunger: @pet.hunger,
+      image: @pet.avatar.attached? ? url_for(@pet.avatar) : "",
+      personality: @pet.personality,
+      phrase: @pet.phrase,
+    }
+  end
+
   private
 
   def pet_params
