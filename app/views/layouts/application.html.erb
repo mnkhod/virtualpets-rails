@@ -23,6 +23,23 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <div data-controller="metamask">
+        <div data-metamask-target="content">
+          <p>
+            Address:
+            <span data-metamask-target="address"></span>
+          </p>
+          <button data-action="click->metamask#logout">Log Out</button>
+        </div>
+
+        <div data-metamask-target="login" class="hidden">
+        </div>
+      </div>
+      <br>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>

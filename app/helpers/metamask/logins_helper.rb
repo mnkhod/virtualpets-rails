@@ -1,0 +1,2 @@
+module Metamask::LoginsHelper
+end
