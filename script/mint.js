@@ -550,7 +550,7 @@ async function main() {
 
   const args = process.argv.slice(2) // remove 'node' and script name
   const address = args[0]
-  if (!address) throw ("ENV ADDRESS")
+  if (!address) throw ("ARGUMENT ADDRESS MISSING")
 
   let provider = new ethers.JsonRpcProvider("https://sepolia.shape.network")
   let signer = new ethers.Wallet(PK, provider)
@@ -559,7 +559,5 @@ async function main() {
   let nftContract = new ethers.Contract(NFT, abi, signer)
 
   let tx = await nftContract.safeMint(address)
-  let receipt = await tx.wait()
-  let id = Number(receipt.logs[0].args[2])
-  console.log(`${id},${receipt.hash}`)
+  console.log(tx.hash)
 }

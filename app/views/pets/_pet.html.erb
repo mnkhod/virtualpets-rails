@@ -1,0 +1,20 @@
+<section>
+  <%= tag.h5 pet.name, class: "" %>
+  <div>
+    <%= tag.span pet.gender, class: "" %>
+    |
+    <%= tag.span pet.animal, class: "" %>
+    | hunger:
+    <%= tag.span pet.hunger, class: "" %>
+    | age:
+    <%= tag.span pet.age, class: "" %>
+    | level:
+    <%= tag.span pet.level, class: "" %>
+    | nft id:
+    <%= tag.span pet.nft_id, class: "" %>
+  </div>
+  <%= link_to "Chat with pet", "#" %>
+  ||
+  <%= link_to "Check pet", "#" %>
+  <hr>
+</section>

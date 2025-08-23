@@ -1,0 +1,8 @@
+<section id="<%= dom_id(transaction) %>">
+  <hr>
+  <p>Transaction -
+    <%= transaction.tx %></p>
+  <%= link_to "Check Transaction",
+  "https://sepolia.shapescan.xyz/tx/#{transaction.tx}" %>
+  <hr>
+</section>

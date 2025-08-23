@@ -1,30 +1,26 @@
+<details open>
+  <summary>Pending Transactions</summary>
+  <%= turbo_stream_from :pending_transactions %>
+  <section id="pending_transactions_container">
+  </section>
+</details>
+
+<%= turbo_stream_from :pets %>
 <h1>Pets |
-  <%= @pets.size %>
+  <em id="pets_counter"><%= @pets.size %></em>
 </h1>
 
-<%= link_to "Create Virtual Pet", new_pet_path %>
+<p>Pending Pets -
+  <em id="pets_pending_counter"><%= @pending_amount %></em></p>
 
-<%# @block_hash %>
+<br>
+<%= link_to "Create Virtual Pet", new_pet_path %>
 
 <hr>
 
-<% @pets.each do |pet| %>
-  <section>
-    <%= tag.h5 pet.name, class: "" %>
-    <div>
-      <%= tag.span pet.gender, class: "" %>
-      |
-      <%= tag.span pet.animal, class: "" %>
-      | hunger:
-      <%= tag.span pet.hunger, class: "" %>
-      | age:
-      <%= tag.span pet.age, class: "" %>
-      | level:
-      <%= tag.span pet.level, class: "" %>
-    </div>
-    <%= link_to "Chat with pet", nil %>
-    ||
-    <%= link_to "Check pet", nil %>
-  </section>
-  <hr>
-<% end %>
+<%= turbo_stream_from :user_pets %>
+<div id="<%= dom_id(Current.user,"pets") %>">
+  <% @pets.each do |pet| %>
+    <%= render pet %>
+  <% end %>
+</div>

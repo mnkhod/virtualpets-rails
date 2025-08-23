@@ -9,6 +9,7 @@ class CreatePets < ActiveRecord::Migration[8.0]
       t.integer :hunger, default: 0
       t.integer :age, default: 1
       t.integer :level, default: 1
+      t.integer :status, default: 0
 
       t.timestamps
     end
