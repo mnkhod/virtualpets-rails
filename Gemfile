@@ -61,3 +61,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "hotwire-spark", "~> 0.1.13", group: :development
+
+gem "faker", "~> 3.5", groups: [:development, :test]
