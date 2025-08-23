@@ -4,10 +4,11 @@ class ChatsController < ApplicationController
 
   def show
     @messages = @chat.messages
+    @conversations_length = @messages.where(role: :user).size
   end
 
   def update
-    @chat.with_instructions @pet.instruction
+    # @chat.with_instructions @pet.instruction
     @chat.ask chat_params[:question]
 
     redirect_to pet_chat_path(@pet, @chat), notice: "Created Message"

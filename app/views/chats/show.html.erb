@@ -12,24 +12,42 @@
     <%= @pet.age %></li>
   <li>Level -
     <%= @pet.level %></li>
+  <li>Conversation Length -
+    <%= @conversations_length %></li>
 </ul>
 
-<fieldset style="width:50%">
-  <% if @messages.any? %>
-    <% @messages.each do |message| %>
-      <%= tag.p message.content, style: "text-align:right;" if message.role == "user" %>
+<main style="width:50%">
+  <fieldset>
+    <% if @messages.any? %>
+      <% @messages.each do |message| %>
 
-      <%= if message.role == "assistant"
-        tag.p "#{@pet.name}: #{message.content}", style: "text-align:left;"
-      end %>
+        <% if message.role == "user" %>
+          <p style="text-align: right;">
+            <i>
+              <%= tag.mark message.content %>
+            </i>
+          </p>
+        <% end %>
 
+        <% if message.role == "assistant" %>
+          <p style="text-align: left;">
+            <%= tag.i "#{@pet.name}: #{message.content}" %>
+          </p>
+        <% end %>
+
+        <% if message.role == "assistant" %>
+        <% end %>
+
+      <% end %>
     <% end %>
-  <% end %>
-</fieldset>
-
-<%= form_with model: @chat, url: pet_chat_path(@pet) do |f| %>
-  <fieldset style="width:50%">
-    <%= f.text_field :question, style: "width:92%" %>
-    <%= f.submit "Send" %>
   </fieldset>
-<% end %>
+
+  <%= form_with model: @chat, url: pet_chat_path(@pet) do |f| %>
+    <fieldset>
+      <%= f.text_field :question, style: "width:90%" %>
+      <%= f.submit "Send" %>
+    </fieldset>
+  <% end %>
+</main>
+
+<%= link_to "Go Back", pets_path %>
