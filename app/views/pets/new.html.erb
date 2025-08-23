@@ -1,32 +1,43 @@
 <h1>Create Pet</h1>
 
-<%= form_with model: [ @pet ] do |f| %>
+<div data-controller="metamask">
+  <div data-metamask-target="content">
+    <%= form_with model: [ @pet ] do |f| %>
 
-  <% if @pet.errors.any? %>
-    <% @pet.errors.each do |error| %>
-      <%= tag.p error.full_message %>
+      <% if @pet.errors.any? %>
+        <% @pet.errors.each do |error| %>
+          <%= tag.p error.full_message %>
+        <% end %>
+      <% end %>
+
+      <%= f.hidden_field "metamask[address]",
+                     name: "metamask[address]",
+                     "data-metamask-target": "form" %>
+
+      <fieldset>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </fieldset>
+
+      <fieldset>
+        <%= f.label :gender %>
+        <%= f.select :gender,
+                 options_for_select(Pet.genders.map { |k, v| [k.capitalize, k] }),
+                 { prompt: "Select gender" } %>
+      </fieldset>
+
+      <fieldset>
+        <%= f.label :animal %>
+        <%= f.select :animal,
+                 options_for_select(Pet.animals.map { |k, v| [k.capitalize, k] }),
+                 { prompt: "Select Type" } %>
+      </fieldset>
+
+      <br>
+      <%= f.submit %>
     <% end %>
-  <% end %>
+  </div>
 
-  <fieldset>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </fieldset>
-
-  <fieldset>
-    <%= f.label :gender %>
-    <%= f.select :gender,
-             options_for_select(Pet.genders.map { |k, v| [k.capitalize, k] }),
-             { prompt: "Select gender" } %>
-  </fieldset>
-
-  <fieldset>
-    <%= f.label :animal %>
-    <%= f.select :animal,
-             options_for_select(Pet.animals.map { |k, v| [k.capitalize, k] }),
-             { prompt: "Select Type" } %>
-  </fieldset>
-
-  <br>
-  <%= f.submit %>
-<% end %>
+  <div data-metamask-target="login" class="hidden">
+  </div>
+</div>

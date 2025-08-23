@@ -4,7 +4,7 @@ import Cookies from "js-cookie"
 // Turbo.visit(window.location.href, { action: "replace" })
 // Connects to data-controller="metamask"
 export default class extends Controller {
-  static targets = ["content", "login", "address"]
+  static targets = ["content", "login", "address", "form"]
 
   connect() {
     if (!window.ethereum) return;
@@ -14,11 +14,16 @@ export default class extends Controller {
 
     const contentEl = this.contentTarget
     const loginEl = this.loginTarget
-    const addressEl = this.addressTarget
 
     if (metamask_account) {
-      if (addressEl) {
+      if (this.hasAddressTarget) {
+        let addressEl = this.addressTarget
         addressEl.textContent = metamask_account
+      }
+
+      if (this.hasFormTarget) {
+        let formHiddenEl = this.formTarget
+        formHiddenEl.value = metamask_account
       }
     } else {
       contentEl.classList.add('hidden')
@@ -33,7 +38,6 @@ export default class extends Controller {
   async login() {
     const contentEl = this.contentTarget
     const loginEl = this.loginTarget
-    const addressEl = this.addressTarget
 
     await window.ethereum.request({ method: "eth_requestAccounts" })
     let accounts = await window.ethereum.request({ method: "eth_accounts" })
@@ -46,7 +50,8 @@ export default class extends Controller {
     })
 
     if (contentEl.classList.contains("hidden")) {
-      if (addressEl) {
+      if (this.hasAddressTarget) {
+        let addressEl = this.addressTarget
         addressEl.textContent = account
       }
 
@@ -58,7 +63,6 @@ export default class extends Controller {
   logout() {
     const contentEl = this.contentTarget
     const loginEl = this.loginTarget
-    const addressEl = this.addressTarget
 
     Cookies.remove('metamask_account')
 
@@ -69,7 +73,8 @@ export default class extends Controller {
       <button data-action="click->metamask#login">Login</button>
     `
 
-    if (addressEl) {
+    if (this.hasAddressTarget) {
+      let addressEl = this.addressTarget
       addressEl.textContent = ""
     }
   }

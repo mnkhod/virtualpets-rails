@@ -65,3 +65,5 @@ end
 gem "hotwire-spark", "~> 0.1.13", group: :development
 
 gem "faker", "~> 3.5", groups: [:development, :test]
+
+gem "dotenv-rails", "~> 3.1", groups: [:development, :test]

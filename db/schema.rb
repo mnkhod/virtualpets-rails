@@ -16,6 +16,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_23_122813) do
     t.string "name"
     t.integer "gender"
     t.integer "animal"
+    t.integer "nft_id"
     t.integer "hunger", default: 0
     t.integer "age", default: 1
     t.integer "level", default: 1
