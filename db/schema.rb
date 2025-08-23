@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_23_185442) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_23_194403) do
+  create_table "chats", force: :cascade do |t|
+    t.string "model_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "chat_id", null: false
+    t.string "role"
+    t.text "content"
+    t.string "model_id"
+    t.integer "input_tokens"
+    t.integer "output_tokens"
+    t.integer "tool_call_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["tool_call_id"], name: "index_messages_on_tool_call_id"
+  end
+
   create_table "pets", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "name"
@@ -37,6 +57,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_23_185442) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "tool_calls", force: :cascade do |t|
+    t.integer "message_id", null: false
+    t.string "tool_call_id", null: false
+    t.string "name", null: false
+    t.json "arguments", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_tool_calls_on_message_id"
+    t.index ["tool_call_id"], name: "index_tool_calls_on_tool_call_id"
+  end
+
   create_table "transactions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "status", default: 0
@@ -54,7 +85,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_23_185442) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "messages", "chats"
   add_foreign_key "pets", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "tool_calls", "messages"
   add_foreign_key "transactions", "users"
 end
