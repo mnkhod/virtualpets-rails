@@ -23,11 +23,6 @@ class Transaction < ApplicationRecord
         target: "transaction_#{self.id}",
       )
 
-      puts "PET==========================================="
-      puts self.user.pets.last
-      puts self.user.pets.last.name
-      puts "=============================================="
-
       broadcast_append_to(
         :user_pets,
         partial: "pets/pet",

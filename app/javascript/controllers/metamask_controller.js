@@ -55,6 +55,11 @@ export default class extends Controller {
         addressEl.textContent = account
       }
 
+      if (this.hasFormTarget) {
+        let formHiddenEl = this.formTarget
+        formHiddenEl.value = account
+      }
+
       contentEl.classList.remove("hidden")
       loginEl.classList.add("hidden")
     }
