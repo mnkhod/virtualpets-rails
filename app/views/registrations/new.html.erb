@@ -1,0 +1,28 @@
+<%= tag.h1 "Registration", class: "" %>
+
+<%= form_with model: @user, url: registration_path do |f| %>
+
+  <% if @user.errors.any? %>
+    <% @user.errors.each do |error| %>
+      <%= tag.p error.full_message %>
+    <% end %>
+  <% end %>
+
+  <fieldset>
+    <%= f.label :email_address %>
+    <%= f.text_field :email_address %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </fieldset>
+
+  <br>
+  <%= f.submit %>
+<% end %>
