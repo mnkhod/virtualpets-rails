@@ -16,6 +16,7 @@ class PetsController < ApplicationController
 
       NftMintJob.perform_later Current.user, @pet, metamask_params[:address]
       InitialConversationJob.perform_later @pet
+      PetAvatarGenerationJob.perform_later @pet
 
       redirect_to pets_path, notice: "Created Pets"
     else
