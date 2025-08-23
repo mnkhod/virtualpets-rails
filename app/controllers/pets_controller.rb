@@ -31,7 +31,7 @@ class PetsController < ApplicationController
   private
 
   def pet_params
-    params.expect(pet: [:name, :animal, :gender])
+    params.expect(pet: [:name, :animal, :gender, :personality, :phrase])
   end
 
   def metamask_params

@@ -27,10 +27,26 @@
       </fieldset>
 
       <fieldset>
+        <%= f.label :personality %>
+        <%= f.select :personality,
+                 options_for_select(Pet.personalities.map { |k, v| [k.capitalize, k] }),
+                 { prompt: "Select personality" } %>
+      </fieldset>
+
+      <fieldset>
         <%= f.label :animal %>
         <%= f.select :animal,
                  options_for_select(Pet.animals.map { |k, v| [k.capitalize, k] }),
-                 { prompt: "Select Type" } %>
+                 { prompt: "Select type" } %>
+      </fieldset>
+
+      <fieldset data-controller="generate">
+        <%= f.label :phrase %>
+        <%= f.text_field :phrase,
+                     readonly: true,
+                     "data-generate-target": "phrase",
+                     size: "30" %>
+        <button type="button" data-action="click->generate#phraseGenerate">Generate</button>
       </fieldset>
 
       <br>
