@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :pets do
+    resources :chats, only: %i[ show update ]
+  end
+
   resources :pets
 
   namespace :metamask do

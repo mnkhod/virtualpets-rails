@@ -1,0 +1,35 @@
+<h1>Chat With
+  <%= @pet.name %></h1>
+
+<ul>
+  <li>Personality -
+    <%= @pet.personality %></li>
+  <li>Phrase -
+    <%= @pet.phrase %></li>
+  <li>Hunger -
+    <%= @pet.hunger %></li>
+  <li>Age -
+    <%= @pet.age %></li>
+  <li>Level -
+    <%= @pet.level %></li>
+</ul>
+
+<fieldset style="width:50%">
+  <% if @messages.any? %>
+    <% @messages.each do |message| %>
+      <%= tag.p message.content, style: "text-align:right;" if message.role == "user" %>
+
+      <%= if message.role == "assistant"
+        tag.p "#{@pet.name}: #{message.content}", style: "text-align:left;"
+      end %>
+
+    <% end %>
+  <% end %>
+</fieldset>
+
+<%= form_with model: @chat, url: pet_chat_path(@pet) do |f| %>
+  <fieldset style="width:50%">
+    <%= f.text_field :question, style: "width:92%" %>
+    <%= f.submit "Send" %>
+  </fieldset>
+<% end %>
