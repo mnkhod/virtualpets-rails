@@ -2,7 +2,7 @@ class PetAvatarGenerationJob < ApplicationJob
   queue_as :default
 
   def perform(pet)
-    image = RubyLLM.paint(pet.avatar_prompt, size: "1024x1024")
+    image = RubyLLM.paint(pet.avatar_prompt, size: "1024x1024", model: "gpt-image-1")
 
     filename = "#{pet.name}-#{Time.current.to_i}.png"
     image_io = StringIO.new(image.to_blob)

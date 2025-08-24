@@ -40,8 +40,9 @@
         <div data-metamask-target="login" class="hidden">
         </div>
       </div>
+      <br>
       <%= if authenticated?
-        button_to "Log out",
+        button_to "User log out",
         session_path,
         method: :delete,
         data: {

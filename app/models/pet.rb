@@ -29,7 +29,9 @@ class Pet < ApplicationRecord
 
   def avatar_prompt
     <<~STR
-      Anime style nft virtual pet who is a #{self.personality} energetic #{self.gender} #{self.animal}.
+      8-bit pixel art of #{self.personality} #{self.gender} #{self.animal}, low resolution look (~64×64), simple palette, plain background, no dithering, no text.
     STR
   end
 end
+
+# 8-bit pixel art with plain background, low resolution (~64x64), no text style virtual pet who is a #{self.personality} energetic #{self.gender} #{self.animal}.
