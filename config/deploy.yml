@@ -32,10 +32,7 @@ registry:
     - KAMAL_REGISTRY_PASSWORD
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 env:
-  secret: [RAILS_MASTER_KEY]
-  PK: PK
-  NFT: NFT
-  OPENAI_API_KEY: OPENAI_API_KEY
+  secret: [RAILS_MASTER_KEY, PK, NFT, OPENAI_API_KEY]
   clear:
     # Run the Solid Queue Supervisor inside the web server's Puma process to do jobs.
     # When you start using multiple servers, you should split out job processing to a dedicated machine.
