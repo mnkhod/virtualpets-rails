@@ -22,22 +22,22 @@ export default class extends Controller {
 
   getPhraseData() {
     return [
-      "don’t test me, human ✨",
-      "meow~ deal with it 😼",
-      "bow down to fabulous me 💅",
+      "don’t test me, human",
+      "meow~ deal with it",
+      "bow down to fabulous me",
       "ugh, as if!",
-      "anything for you 💖",
+      "anything for you",
       "you got it, buddy!",
-      "your wish, my command 🙏",
-      "always happy to help ✨",
-      "look at me shine 🌟",
-      "mirror, mirror, I already know 😎",
+      "your wish, my command",
+      "always happy to help",
+      "look at me shine",
+      "mirror, mirror, I already know",
       "perfection reporting in",
-      "you’re lucky I’m even talking to you 💋",
-      "woof! 🐾",
+      "you’re lucky I’m even talking to you",
+      "woof!",
       "chirp chirp, knowledge drop!",
       "zoinks!",
-      "powered by snacks 🍪",
+      "powered by snacks",
     ]
   }
 }

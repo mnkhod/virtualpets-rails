@@ -15,8 +15,12 @@
     | level:
     <%= tag.span pet.level, class: "" %>
     | nft id:
-    <%= tag.span pet.nft_id, class: "" %>
+    <%= link_to pet.nft_id,
+    "https://sepolia.shapescan.xyz/token/#{ENV["NFT"]}/instance/#{pet.nft_id}",
+    target: "_blank",
+    rel: "noopener" %>
   </div>
+
   <%= link_to "Chat with pet", pet_chat_path(pet, pet.chat) %>
   <hr>
 </section>
