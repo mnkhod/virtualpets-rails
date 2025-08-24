@@ -8,7 +8,6 @@ class ChatsController < ApplicationController
   end
 
   def update
-    # @chat.with_instructions @pet.instruction
     @chat.ask chat_params[:question]
 
     redirect_to pet_chat_path(@pet, @chat), notice: "Created Message"
