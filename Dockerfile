@@ -33,9 +33,11 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Or use the official Node.js approach
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
-    apt-get install -y nodejs
+# Use the official Node.js approach
+RUN apt-get update -qq && \
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
