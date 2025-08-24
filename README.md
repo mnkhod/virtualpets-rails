@@ -25,3 +25,11 @@ The though behind it is to have web2/web3 mix with dynamic possibilities with vi
 - Allowing background-jobs, good use case for image generation and ai prompt
 - Hotwire allowed single page like experience
 - Node scripts was used for blockchain interaction with background-jobs
+
+## Screen Recording & Walkthrough
+- https://youtu.be/pXuizbqOKYw
+
+## Teammates
+
+- Project Manager - Sainaa
+- Developer - mnkhod
