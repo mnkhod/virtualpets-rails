@@ -33,9 +33,68 @@ export default class extends Controller {
         <button data-action="click->metamask#login">Login</button>
       `
     }
+
+    if (!this.isListening) {
+      document.addEventListener("metamask-login", () => this.loginEvent())
+      document.addEventListener("metamask-logout", () => this.logoutEvent())
+      this.isListening = true
+    }
+  }
+
+  disconnect() {
+    if (this.isListening) {
+      document.removeEventListener("metamask-login", () => this.loginEvent())
+      document.removeEventListener("metamask-logout", () => this.logoutEvent())
+      this.isListening = false
+    }
+  }
+
+  loginEvent() {
+    let contentEl = this.contentTarget
+
+    if (contentEl.classList.contains("hidden")) {
+      let loginEl = this.loginTarget
+      let account = Cookies.get('metamask_account')
+
+      if (this.hasAddressTarget) {
+        let addressEl = this.addressTarget
+        addressEl.textContent = account
+      }
+
+      if (this.hasFormTarget) {
+        let formHiddenEl = this.formTarget
+        formHiddenEl.value = account
+      }
+
+      contentEl.classList.remove("hidden")
+      loginEl.classList.add("hidden")
+    }
+  }
+
+  logoutEvent() {
+    let contentEl = this.contentTarget
+
+    if (!contentEl.classList.contains("hidden")) {
+      let loginEl = this.loginTarget
+
+      contentEl.classList.add('hidden')
+      loginEl.classList.remove('hidden')
+      loginEl.innerHTML = `
+        <p>Metamask Login Required</p>
+        <button data-action="click->metamask#login">Login</button>
+      `
+
+      if (this.hasAddressTarget) {
+        let addressEl = this.addressTarget
+        addressEl.textContent = ""
+      }
+    }
   }
 
   async login() {
+    if (!window.ethereum) return;
+    if (!window.ethereum.isMetaMask) return;
+
     const contentEl = this.contentTarget
     const loginEl = this.loginTarget
 
@@ -63,6 +122,8 @@ export default class extends Controller {
       contentEl.classList.remove("hidden")
       loginEl.classList.add("hidden")
     }
+
+    document.dispatchEvent(new CustomEvent("metamask-login"))
   }
 
   logout() {
@@ -82,5 +143,7 @@ export default class extends Controller {
       let addressEl = this.addressTarget
       addressEl.textContent = ""
     }
+
+    document.dispatchEvent(new CustomEvent("metamask-logout"))
   }
 }
