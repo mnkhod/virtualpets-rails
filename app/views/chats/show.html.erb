@@ -1,11 +1,16 @@
 <h1>Chat With
   <%= @pet.name %></h1>
 
-<% if @pet.avatar.attached? %>
-  <%= image_tag @pet.avatar.representation(resize_to_limit: [250, 250]) %>
-<% else %>
-  <p>avatar still generating...</p>
-<% end %>
+<%= turbo_stream_from :pet_image_update %>
+
+<div id="pet_avatar_<%= @pet.id %>">
+  <% if @pet.avatar.attached? %>
+    <%= image_tag @pet.avatar.representation(resize_to_limit: [250, 250]) %>
+    <%# render "fragments/pet_image", locals: { pet: @pet } %>
+  <% else %>
+    <p>avatar still generating...</p>
+  <% end %>
+</div>
 
 <ul>
   <li>Personality -

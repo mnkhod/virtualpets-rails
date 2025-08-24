@@ -1,6 +1,6 @@
 class PetsController < ApplicationController
   def index
-    @pets = Current.user.pets.completed
+    @pets = Current.user.pets.completed.order("created_at DESC")
     @pending_amount = Current.user.pets.pending.size
   end
 
