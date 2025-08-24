@@ -39,10 +39,6 @@ RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 
-# Add npm install step
-COPY package.json package-lock.json ./
-RUN npm install
-
 # Copy application code
 COPY . .
 
@@ -58,6 +54,10 @@ FROM base
 # Installing at the final stage
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
+
+# Add npm install step
+COPY package.json package-lock.json ./
+RUN npm install
 
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
